@@ -46,5 +46,5 @@ class ColorDescribor:
                     interval_idx = int(freq_percent / interval_size)
                     if interval_idx != 0:  
                         blob_hist[value, interval_idx-1] += 1
-        return blob_hist
+        return blob_hist.flatten()
       

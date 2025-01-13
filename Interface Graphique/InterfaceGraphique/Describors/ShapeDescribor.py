@@ -22,7 +22,7 @@ class ShapeDescribor:
                     interval_idx = int(freq_percent / interval_size)
                     if interval_idx != 0:  
                         blob_hist[value, interval_idx-1] += 1
-        return blob_hist
+        return blob_hist.flatten()
     
     def get_norm_and_orientation(self, image, filter):
         if filter == "sobel":
@@ -80,11 +80,11 @@ class ShapeDescribor:
             blob_orientation = np.concatenate(blob_orientations)
         return blob_orientation
 
-if __name__ == "__main__":
-    shape_describor = ShapeDescribor()
-    image = np.zeros((3,448,448))
-    print(image.shape)
-    orientation = shape_describor.get_norm_and_orientation(image, "")
-    print(orientation)
-    blob_orientation = shape_describor.get_histogram_blob_orientation(orientation)
-    print(blob_orientation)
+# if __name__ == "__main__":
+#     shape_describor = ShapeDescribor()
+#     image = np.zeros((3,448,448))
+#     print(image.shape)
+#     orientation = shape_describor.get_norm_and_orientation(image, "")
+#     print(orientation)
+#     blob_orientation = shape_describor.get_histogram_blob_orientation(orientation)
+#     print(blob_orientation)

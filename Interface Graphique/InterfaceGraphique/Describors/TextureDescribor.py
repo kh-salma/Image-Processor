@@ -37,12 +37,11 @@ class TextureDescribor:
     
     def get_local_binary_pattern(self, image):
         if image.ndim == 2:
-            lbp = self.local_binary_pattern_calculation(image)
-            hist = np.histogram(lbp, bins=256, range=(0, 255))[0]
+            lbp = self.local_binary_pattern_calculation(image).flatten()
         else:
-            histograms = [np.histogram(self.local_binary_pattern_calculation(image[channel]), bins=256, range=(0, 255))[0] for channel in range(image.shape[0])]
-            hist = np.concatenate(histograms)
-        return hist
+            lbps = [self.local_binary_pattern_calculation(image[channel]).flatten() for channel in range(image.shape[0])]
+            lbp = np.concatenate(lbps)
+        return lbp
     
     def get_local_binary_pattern_histogram_blob(self, input_array, window=(3, 3), nb_interval=4):
         nb_elements = 256
@@ -59,7 +58,7 @@ class TextureDescribor:
                     interval_idx = int(freq_percent / interval_size)
                     if interval_idx != 0:  
                         blob_hist[value, interval_idx-1] += 1
-        return blob_hist
+        return blob_hist.flatten()
     
     def get_haralick_histogram(self, image, image_type, distances=[1], angles=[0], symmetric=True, normed=True, canaux=None):
         if image_type in h_image_type:
@@ -70,17 +69,15 @@ class TextureDescribor:
             levels = 256
         
         if len(image.shape) == 3:
-            histograms = []
+            haralick_features = []
             for channel in range(image.shape[2]):
                 glcm = graycomatrix(image[:, :, channel], distances=distances, angles=angles, levels=levels, symmetric=symmetric, normed=normed)
-                haralick_features = np.hstack([graycoprops(glcm, prop).ravel() for prop in ['contrast', 'dissimilarity', 'homogeneity', 'energy', 'correlation', 'ASM']])
-                hist, _ = np.histogram(haralick_features, bins=256, range=(0, 256))
-                histograms.append(hist)
-            combined_hist = np.sum(histograms, axis=0)
-            return combined_hist
+                haralick_feature = np.hstack([graycoprops(glcm, prop).ravel() for prop in ['contrast', 'dissimilarity', 'homogeneity', 'energy', 'correlation', 'ASM']])
+                haralick_features.append(haralick_feature.flatten())
+            combined_harilick = np.sum(haralick_features, axis=0)
+            return combined_harilick
         else:
             glcm = graycomatrix(image, distances=distances, angles=angles, levels=levels, symmetric=symmetric, normed=normed)
             haralick_features = np.hstack([graycoprops(glcm, prop).ravel() for prop in ['contrast', 'dissimilarity', 'homogeneity', 'energy', 'correlation', 'ASM']])
-            hist, _ = np.histogram(haralick_features, bins=256, range=(0, 256))
-            return hist
+            return haralick_features.flatten()
        
