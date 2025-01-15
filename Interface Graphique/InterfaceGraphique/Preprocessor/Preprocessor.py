@@ -175,7 +175,7 @@ class Preprocessor:
         self.color_spaces = {
             # "rgb": lambda img: img,
             # "gray_uniform": self.color_conversion.rgb2gray_uniform,
-            "gray_601": self.color_conversion.rgb2gray_601,
+            # "gray_601": self.color_conversion.rgb2gray_601,
             # "gray_907": self.color_conversion.rgb2gray_907,
             # "yuv": self.color_conversion.rgb2yuv,
             # "yiq": self.color_conversion.rgb2yiq,
