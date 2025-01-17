@@ -2,6 +2,8 @@ import numpy as np
 
 class ShapeDescribor:
     def get_blob_orientation(self, input_array, window=(3, 3), nb_interval=4, nb_directions=None):
+        input_array = np.array(input_array)
+        
         if not nb_directions:
             array = input_array
             nb_elements = 360
@@ -72,17 +74,13 @@ class ShapeDescribor:
             hist_orientation_weighted = np.concatenate(histograms)
         return hist_orientation_weighted
     
-    def get_histogram_blob_orientation(self, image, window=(3, 3), nb_interval=4, nb_directions=None):
-        if image.ndim == 2:
-            blob_orientation = self.get_blob_orientation(image, window, nb_interval, nb_directions).flatten()
-        else:
-            blob_orientations = [self.get_blob_orientation(image[channel], window, nb_interval, nb_directions).flatten() for channel in range(image.shape[0])]
-            blob_orientation = np.concatenate(blob_orientations)
-        return blob_orientation
+    def get_histogram_blob_orientation(self, orientation_array, window=(3, 3), nb_interval=4, nb_directions=None):
+        blob_orientation = self.get_blob_orientation(orientation_array, window, nb_interval, nb_directions)
+        return blob_orientation.flatten()
 
 # if __name__ == "__main__":
 #     shape_describor = ShapeDescribor()
-#     image = np.zeros((3,448,448))
+#     image = np.zeros((448, 448), dtype=np.uint8)
 #     print(image.shape)
 #     orientation = shape_describor.get_norm_and_orientation(image, "")
 #     print(orientation)

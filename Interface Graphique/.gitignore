@@ -1,0 +1,5 @@
+BD_images/
+__pycache__/
+converted_BD_images/*
+*.png
+.venv/
