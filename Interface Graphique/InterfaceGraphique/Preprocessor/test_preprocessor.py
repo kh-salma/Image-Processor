@@ -3,6 +3,7 @@ import cv2
 import json
 import numpy as np
 import sys
+import tqdm
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from InterfaceGraphique.Preprocessor.ColorConversion import ColorConversion
 from InterfaceGraphique.Describors.ColorDescribor import ColorDescribor
@@ -80,7 +81,7 @@ class Preprocessor:
             shape_histograms = {}
 
             for root, _, files in os.walk(input_folder):
-                for file in files:
+                for file in tqdm(files, desc=f"Processing {color_space} images"):
                     if file.lower().endswith((".jpg", ".jpeg", ".png")):
                         image_path = os.path.join(root, file)
                         image = np.array(self.get_image_data(image_path, color_space))
@@ -156,5 +157,5 @@ if __name__ == "__main__":
     preprocessor = Preprocessor()
     preprocessor.process_images_and_save_histograms(
         "C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\BD_images",
-        "C:/Users/salma/OneDrive/Documents/URCA - M2/INF00903/Projet/Interface Graphique/Interface Graphique/Assets/Json Files/histograms_BD_images"
+        "C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\Interface Graphique\\Interface Graphique\\Assets\\Json Files\\histograms_BD_images"
     )
