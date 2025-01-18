@@ -3,7 +3,7 @@ import cv2
 import json
 import numpy as np
 import sys
-import tqdm
+from tqdm import tqdm
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from InterfaceGraphique.Preprocessor.ColorConversion import ColorConversion
 from InterfaceGraphique.Describors.ColorDescribor import ColorDescribor
@@ -25,18 +25,18 @@ class Preprocessor:
         self.color_spaces = {
             # "rgb": self.color_spaces_data['rgb'],
             # "gray_uniform": self.color_spaces_data['grey_uniform'],
-            "gray_601": self.color_spaces_data['grey_601'],
+            # "gray_601": self.color_spaces_data['grey_601'],
             # "gray_907": self.color_spaces_data['grey_907'],
             # "yuv": self.color_spaces_data['yuv'],
-            # "yiq": self.color_spaces_data['yiq'],
-            # "i1i2i3": self.color_spaces_data['i1i2i3'],
-            # "nrgb": self.color_spaces_data['nrgb'],
-            # "hsv": self.color_spaces_data['hsv'],
-            # "hsl": self.color_spaces_data['hsl'],
-            # "cmyk": self.color_spaces_data['cmyk'],
-            # "indexed_222": self.color_spaces_data['indexed_222'],
-            # "indexed_444": self.color_spaces_data['indexed_444'],
-            # "indexed_888": self.color_spaces_data['indexed_888']
+            "yiq": self.color_spaces_data['yiq'],
+            "i1i2i3": self.color_spaces_data['i1i2i3'],
+            "nrgb": self.color_spaces_data['nrgb'],
+            "hsv": self.color_spaces_data['hsv'],
+            "hsl": self.color_spaces_data['hsl'],
+            "cmyk": self.color_spaces_data['cmyk'],
+            "indexed_222": self.color_spaces_data['indexed_222'],
+            "indexed_444": self.color_spaces_data['indexed_444'],
+            "indexed_888": self.color_spaces_data['indexed_888']
         }
 
     def get_image_data(self, image_path, color_space):
@@ -110,7 +110,7 @@ class Preprocessor:
                             #     ),
                             # }
 
-                            print("Shape Descriptors")
+                            # print("Shape Descriptors")
                             # Process and store shape descriptors
                             orientation = {
                                 filter_name: self.shape_describor.get_norm_and_orientation(image, filter_name)[1]
