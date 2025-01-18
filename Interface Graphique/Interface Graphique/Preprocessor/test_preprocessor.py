@@ -29,8 +29,8 @@ class Preprocessor:
             # "gray_907": self.color_spaces_data['grey_907'],
             # "yuv": self.color_spaces_data['yuv'],
             # "yiq": self.color_spaces_data['yiq'],
-            "i1i2i3": self.color_spaces_data['i1i2i3'],
-            "nrgb": self.color_spaces_data['nrgb'],
+            # "i1i2i3": self.color_spaces_data['i1i2i3'],
+            # "nrgb": self.color_spaces_data['nrgb'],
             "hsv": self.color_spaces_data['hsv'],
             "hsl": self.color_spaces_data['hsl'],
             "cmyk": self.color_spaces_data['cmyk'],
@@ -157,5 +157,5 @@ if __name__ == "__main__":
     preprocessor = Preprocessor()
     preprocessor.process_images_and_save_histograms(
         "C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\BD_images",
-        "C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\Interface Graphique\\Interface Graphique\\Assets\\Json Files\\histograms_BD_images"
+        "C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\histograms_BD_images"
     )

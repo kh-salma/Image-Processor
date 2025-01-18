@@ -9,11 +9,11 @@ converted_json_files = [
     # 'grey_uniform__converted_images.json',
     'hsl__converted_images.json',
     'hsv__converted_images.json',
-    'i1i2i3__converted_images.json',
+    # 'i1i2i3__converted_images.json',
     'indexed_222__converted_images.json',
     'indexed_444__converted_images.json',
     'indexed_888__converted_images.json',
-    'nrgb__converted_images.json',
+    # 'nrgb__converted_images.json',
     # 'rgb__converted_images.json',
     # 'yiq__converted_images.json',
     # 'yuv__converted_images.json'
