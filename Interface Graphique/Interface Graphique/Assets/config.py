@@ -15,6 +15,6 @@ converted_json_files = [
     'indexed_888__converted_images.json',
     'nrgb__converted_images.json',
     # 'rgb__converted_images.json',
-    'yiq__converted_images.json',
+    # 'yiq__converted_images.json',
     # 'yuv__converted_images.json'
 ]

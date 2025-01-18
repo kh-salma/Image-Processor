@@ -28,7 +28,7 @@ class Preprocessor:
             # "gray_601": self.color_spaces_data['grey_601'],
             # "gray_907": self.color_spaces_data['grey_907'],
             # "yuv": self.color_spaces_data['yuv'],
-            "yiq": self.color_spaces_data['yiq'],
+            # "yiq": self.color_spaces_data['yiq'],
             "i1i2i3": self.color_spaces_data['i1i2i3'],
             "nrgb": self.color_spaces_data['nrgb'],
             "hsv": self.color_spaces_data['hsv'],
