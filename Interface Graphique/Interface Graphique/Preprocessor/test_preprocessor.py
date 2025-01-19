@@ -31,12 +31,12 @@ class Preprocessor:
             # "yiq": self.color_spaces_data['yiq'],
             # "i1i2i3": self.color_spaces_data['i1i2i3'],
             # "nrgb": self.color_spaces_data['nrgb'],
-            "hsv": self.color_spaces_data['hsv'],
-            "hsl": self.color_spaces_data['hsl'],
-            "cmyk": self.color_spaces_data['cmyk'],
-            "indexed_222": self.color_spaces_data['indexed_222'],
-            "indexed_444": self.color_spaces_data['indexed_444'],
-            "indexed_888": self.color_spaces_data['indexed_888']
+            "hsv": self.color_spaces_data['hsv'], # Didn't execute well
+            "hsl": self.color_spaces_data['hsl'], # Didn't execute well
+            # "cmyk": self.color_spaces_data['cmyk'],
+            # "indexed_222": self.color_spaces_data['indexed_222'],
+            # "indexed_444": self.color_spaces_data['indexed_444'],
+            # "indexed_888": self.color_spaces_data['indexed_888']
         }
 
     def get_image_data(self, image_path, color_space):
