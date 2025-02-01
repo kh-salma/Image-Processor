@@ -81,11 +81,3 @@ class ShapeDescribor:
         blob_orientation = self.get_blob_orientation(orientation_array, window, nb_interval, nb_directions)
         return blob_orientation.flatten()
 
-# if __name__ == "__main__":
-#     shape_describor = ShapeDescribor()
-#     image = np.zeros((448, 448), dtype=np.uint8)
-#     print(image.shape)
-#     orientation = shape_describor.get_norm_and_orientation(image, "")
-#     print(orientation)
-#     blob_orientation = shape_describor.get_histogram_blob_orientation(orientation)
-#     print(blob_orientation)

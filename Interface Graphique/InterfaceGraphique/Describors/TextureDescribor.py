@@ -19,20 +19,6 @@ class TextureDescribor:
         else:
             stats = np.concatenate([self.stats_calculation(image[channel]) for channel in range(image.shape[0])])
         return stats
-    
-    # def local_binary_pattern_calculation(self, image):
-    #     lbp_array = np.zeros((image.shape[0] - 3 + 1, image.shape[1] - 3 + 1), dtype=np.int32)
-    #     for i in range(lbp_array.shape[0]):
-    #         for j in range(lbp_array.shape[1]):
-    #             current_window = image[i:i + 3, j:j + 3]
-    #             center = current_window[1, 1]
-    #             cal_window = current_window - center
-    #             cal_window = (cal_window > 0).astype(np.int32)
-    #             cal_window_vector = cal_window.flatten()
-    #             cal_window_vector = np.delete(cal_window_vector, 4)
-    #             value = np.sum(cal_window_vector * (2 ** np.arange(cal_window_vector.size)))
-    #             lbp_array[i, j] = value
-    #     return lbp_array
 
     def local_binary_pattern_calculation(self, image, take_first_layer=False):
         if take_first_layer:
