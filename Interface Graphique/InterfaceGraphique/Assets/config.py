@@ -1,8 +1,8 @@
 color_spaces = {
     "RGB": "rgb",
-    "Grayscale Uniform": "grey_uniform",
-    "Grayscale - Norme 601": "grey_601",
-    "Grayscale - Norme 907": "grey_907",
+    "Grayscale Uniform": "gray_uniform",
+    "Grayscale - Norme 601": "gray_601",
+    "Grayscale - Norme 907": "gray_907",
     "YUV": "yuv",
     "YIQ": "yiq",
     "I1I2I3I": "i1i2i3",
@@ -17,7 +17,8 @@ color_spaces = {
 gray_image_type = ["gray_uniform", "gray_601", "gray_907"]
 h_image_type = ["hsv", "hsl"]
 indexed_image_type = ["indexed_222", "indexed_444", "indexed_888"]
-converted_base_path = 'C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\converted_BD_images'
+base_dir = 'C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\'
+converted_base_path = base_dir + 'Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\converted_BD_images'
 converted_json_files = [
     'cmyk__converted_images.json',
     'grey_601__converted_images.json',
@@ -34,5 +35,22 @@ converted_json_files = [
     'yiq__converted_images.json',
     'yuv__converted_images.json'
 ]
-histograms_json_files_path = "C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\histograms_BD_images"
+histograms_json_files_path = base_dir + "Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\histograms_BD_images"
 descriptors_json_file_path = lambda color_space:histograms_json_files_path+"\\"+color_space
+descriptors = {
+    "color": ["", "Histogram", "Hue Histogram", "Blob Histogram"],
+    "shape": ["", "Orientation Histogram", "Norm Weighted Orientation Histogram", "Blob Orientation Histogram", "Blob Directional Histogram"],
+    "texture": ["", "Statical Histogram", "LBP Histogram", "Blob LBP Histogram", "Haralick Histogram"],
+    "cnn": ["", "MobileNet Model"]
+}
+hist_keys = {
+    "color": {"Histogram": "hist", "Hue Histogram": "saturated_hue_hist", "Blob Histogram": "blob_hist"},
+    "shape": {"Orientation Histogram": "orientation_hist", "Norm Weighted Orientation Histogram": "norm_weighted_orientation_hist",
+                "Blob Orientation Histogram": "blob_orientation_hist", "Blob Directional Histogram": "blob_direction_hist"},
+    "texture": {"Statical Histogram": "stats_hist", "LBP Histogram": "lbp_hist", "Blob LBP Histogram": "blob_lbp_hist", "Haralick Histogram": "haralick_hist"},
+    "cnn": {"MobileNet Model": "cnn_vector"}
+}
+distances = ["euclidienne", "manhattan", "tchebychev", "intersection_histogramme_x", "intersection_histogramme_y", "chi_2", "minkowshki"]
+shape_filters = ["sobel", "scharr", "prewitt"]
+normalization = ["", "Probability", "Norm", "MinMax", "Standardization", "Rank"]
+color_spaces_ = ["rgb", "gray_uniform", "gray_601", "gray_907", "yuv", "yiq", "i1i2i3", "nrgb", "hsv", "hsl", "cmyk", "indexed_222", "indexed_444", "indexed_888"]
