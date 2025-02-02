@@ -1,5 +1,6 @@
 # 🖼️ Projet de Recherche d'Images par Similarité
 
+[![Project](https://img.shields.io/badge/GithubProject-1.0-red)](https://github.com/kh-salma/Image-Processor.git)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-5.0%2B-green)](https://www.mongodb.com/)
 
@@ -59,7 +60,7 @@
 **NB :** Pour réduire le temps de réponse, une pré-évaluation a été effectué pour stocker certaines combinaions et leur MAP dans une collection MongoDB.
 **Note supplémentaire :** Vu le nombre élevé de combinaisons possibles, si vous souhaitez en traiter davantage, exécutez le script *Python `Evaluation/Evaluator.py`*.
 
-![Interface d'Évaluation'](./Interface%20Graphique/InterfaceGraphique/Assets/Screenshoots/Interface%20d'Evaluation.png)
+![Interface d'Évaluation'](./Interface%20Graphique/InterfaceGraphique/Assets/Screenshoots/Interface%20d%20Evaluation.png)
 
 ## 🛠 Installation
 1. Cloner le dépôt :
