@@ -200,7 +200,6 @@ class Evaluator:
             for result in results:
                 query_image = result["image_path"]
                 retrieved_images = result["ranked_images"]
-                print(f"Calculating AP for query image: {query_image}")
                 query_class = query_image[5:7]
                 relevant_images = [img for img in retrieved_images if img[5:7] == query_class]
                 ap = self.calculate_ap(retrieved_images, relevant_images)
@@ -228,7 +227,7 @@ if __name__ == "__main__":
     evaluator = Evaluator()
     if evaluator.combinations_collection.count_documents({}) == 0:
         evaluator.generate_and_store_combinations()
-    evaluator.process_combinations()
+    # evaluator.process_combinations()
     evaluator.calculate_map()
     best_combo, best_map = evaluator.get_best_combination()
     print(f"Meilleure combinaison : {best_combo} avec MAP = {best_map}")
