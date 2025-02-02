@@ -1,6 +1,5 @@
 BD_images/
 __pycache__/
-*.png
 .venv/
 converted_BD_images/
 texture_histograms.json

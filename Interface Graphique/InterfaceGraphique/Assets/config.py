@@ -1,3 +1,12 @@
+import os
+
+# Directories Path
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+converted_base_path = os.path.join(base_dir, 'Interface Graphique', 'InterfaceGraphique', 'Assets', 'Json Files', 'converted_BD_images')
+histograms_json_files_path = os.path.join(base_dir, 'Interface Graphique', 'InterfaceGraphique', 'Assets', 'Json Files', 'histograms_BD_images')
+descriptors_json_file_path = lambda color_space: os.path.join(histograms_json_files_path, color_space)
+
+# Usable Variables
 color_spaces = {
     "RGB": "rgb",
     "Grayscale Uniform": "gray_uniform",
@@ -17,8 +26,6 @@ color_spaces = {
 gray_image_type = ["gray_uniform", "gray_601", "gray_907"]
 h_image_type = ["hsv", "hsl"]
 indexed_image_type = ["indexed_222", "indexed_444", "indexed_888"]
-base_dir = 'C:\\Users\\salma\\OneDrive\\Documents\\URCA - M2\\INF00903\\Projet\\'
-converted_base_path = base_dir + 'Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\converted_BD_images'
 converted_json_files = [
     'cmyk__converted_images.json',
     'grey_601__converted_images.json',
@@ -35,8 +42,6 @@ converted_json_files = [
     'yiq__converted_images.json',
     'yuv__converted_images.json'
 ]
-histograms_json_files_path = base_dir + "Interface Graphique\\InterfaceGraphique\\Assets\\Json Files\\histograms_BD_images"
-descriptors_json_file_path = lambda color_space:histograms_json_files_path+"\\"+color_space
 descriptors = {
     "color": ["", "Histogram", "Hue Histogram", "Blob Histogram"],
     "shape": ["", "Orientation Histogram", "Norm Weighted Orientation Histogram", "Blob Orientation Histogram", "Blob Directional Histogram"],
