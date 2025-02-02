@@ -65,7 +65,7 @@
 ## 🛠 Installation
 1. Cloner le dépôt :
     ```sh
-    git clone [https://github.com/kh-salma/Image-Processor.git](https://github.com/kh-salma/Image-Processor.git)
+    git clone https://github.com/kh-salma/Image-Processor.git
     cd "./Image-Processor/Interface Graphique"
     ```
 2. Créer un environnement virtuel :
