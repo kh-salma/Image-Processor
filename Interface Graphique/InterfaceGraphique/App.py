@@ -355,7 +355,7 @@ class App(ctk.CTk):
             print("Successfully connected to the MongoDB server.")
         except (ConnectionFailure, ServerSelectionTimeoutError) as e:
             # Handle the case where the server is not found or unavailable
-            raise Exception(f"Failed to connect to the MongoDB server. Make sure the server is running and accessible.")
+            tkinter.messagebox.showerror("Error", f"Failed to connect to the MongoDB server. Make sure the server is running and accessible.")
         
         # Hide main content
         self.sidebar_frame.grid_remove()
