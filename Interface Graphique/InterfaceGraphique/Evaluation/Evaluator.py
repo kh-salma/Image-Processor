@@ -6,13 +6,15 @@ import json
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from InterfaceGraphique.Preprocessor.FileSplitter import FileSplitter
 from InterfaceGraphique.Filters.DistanceFilter import DistanceFilter
 from InterfaceGraphique.Describors.Normalizer import Normalizer
-from InterfaceGraphique.Assets.config import descriptors_json_file_path, descriptors, distances, shape_filters, color_spaces_, hist_keys, gray_image_type, h_image_type, indexed_image_type, normalization
+from InterfaceGraphique.Assets.config import color_spaces, descriptors_json_file_path, descriptors, distances, shape_filters, color_spaces_, hist_keys, gray_image_type, h_image_type, indexed_image_type, normalization
 
 class Evaluator:
     def __init__(self):
         self.images_hist_dict = {}
+        FileSplitter.recombine_texture_histograms(color_spaces, descriptors_json_file_path)
         self.distance_filter = DistanceFilter()
         self.mongo_client = pymongo.MongoClient("mongodb://localhost:27017/")
         self.db = self.mongo_client["image_retrieval"]
@@ -115,23 +117,23 @@ class Evaluator:
                 hist_key = self.get_hist_key(descriptor_type, descriptor_entry)
 
                 for image_name, image_hists in descriptors_dict.items():
-                    relative_path = "BD_images" + image_name.split("BD_images")[-1]
-                    if relative_path not in self.images_hist_dict:
-                        self.images_hist_dict[relative_path] = {}
+                    # image_name = "BD_images" + image_name.split("BD_images")[-1]
+                    if image_name not in self.images_hist_dict:
+                        self.images_hist_dict[image_name] = {}
                     if descriptor_type == "shape" and filter_name:
                         hist = np.array(image_hists[hist_key][filter_name])
                     else:
                         hist = np.array(image_hists[hist_key])
 
-                    if relative_path not in self.images_hist_dict:
-                        self.images_hist_dict[relative_path] = {}
+                    if image_name not in self.images_hist_dict:
+                        self.images_hist_dict[image_name] = {}
                     if descriptor_type == "shape" and filter_name:
                         hist = np.array(image_hists[hist_key][filter_name])
                     else:
                         hist = np.array(image_hists[hist_key])
                     
                     normalized_hist = self.normalize_histogram(hist, normalization_method)
-                    self.images_hist_dict[relative_path][descriptor_type] = normalized_hist
+                    self.images_hist_dict[image_name][descriptor_type] = normalized_hist
 
         except FileNotFoundError:
             print(f"Error: The file {descriptor_file} does not exist.")
@@ -189,14 +191,18 @@ class Evaluator:
     def calculate_map(self):
         combinations = self.collection.distinct("combination")
         for combo in combinations:
+            if self.map_collection.find_one({"combination": combo}):
+                continue  # Skip if MAP for this combination is already calculated
+            
             results = self.collection.find({"combination": combo})
             ap_sum = 0
             count = 0
             for result in results:
                 query_image = result["image_path"]
                 retrieved_images = result["ranked_images"]
-                query_class = query_image.split('\\')[1]
-                relevant_images = [img for img in retrieved_images if img.split('\\')[1] == query_class]
+                print(f"Calculating AP for query image: {query_image}")
+                query_class = query_image[5:7]
+                relevant_images = [img for img in retrieved_images if img[5:7] == query_class]
                 ap = self.calculate_ap(retrieved_images, relevant_images)
                 ap_sum += ap
                 count += 1
@@ -220,8 +226,9 @@ class Evaluator:
 
 if __name__ == "__main__":
     evaluator = Evaluator()
-    # evaluator.generate_and_store_combinations()
-    # evaluator.process_combinations()
+    if evaluator.combinations_collection.count_documents({}) == 0:
+        evaluator.generate_and_store_combinations()
+    evaluator.process_combinations()
     evaluator.calculate_map()
     best_combo, best_map = evaluator.get_best_combination()
     print(f"Meilleure combinaison : {best_combo} avec MAP = {best_map}")

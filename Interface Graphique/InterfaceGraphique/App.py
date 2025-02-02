@@ -11,6 +11,7 @@ import pymongo
 from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
 import glob
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from InterfaceGraphique.Preprocessor.FileSplitter import FileSplitter
 from InterfaceGraphique.Filters.DistanceFilter import DistanceFilter
 from InterfaceGraphique.Describors.Normalizer import Normalizer
 from InterfaceGraphique.Assets.config import color_spaces, descriptors_json_file_path, gray_image_type, h_image_type, indexed_image_type, hist_keys
@@ -26,6 +27,8 @@ class App(ctk.CTk):
         self.db = self.mongo_client["image_retrieval"]
         self.collection = self.db["evaluation_results"]
         self.map_collection = self.db["map_results"]
+
+        FileSplitter.recombine_texture_histograms(color_spaces, descriptors_json_file_path)
         
         self.distance_filter = DistanceFilter()
 
@@ -90,7 +93,7 @@ class App(ctk.CTk):
                                       "Blob Orientation Histogram", "Blob Directional Histogram"], 5),
             ("shape_filter_menu", ["Sobel", "Scharr", "Prewitt"], 6),
             ("texture_describor_menu", ["...", "Statical Histogram", "LBP Histogram", "Blob LBP Histogram", "Haralick Histogram"], 7),
-            ("cnn_describor_menu", ["...", "ImageNet Model"], 8),
+            ("cnn_describor_menu", ["...", "MobileNet Model"], 8),
             ("normalization_menu", ["...", "Probability", "Norm", "MinMax", "Standardization", "Rank"], 9)
         ]
 
