@@ -23,13 +23,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.mongo_client = pymongo.MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=5000)  # 5-second timeout
-        self.db = self.mongo_client["image_retrieval"]
-        self.collection = self.db["evaluation_results"]
-        self.map_collection = self.db["map_results"]
-
         FileSplitter.recombine_texture_histograms(color_spaces, descriptors_json_file_path)
-        
         self.distance_filter = DistanceFilter()
 
         self.requested_image_name = None
@@ -351,6 +345,10 @@ class App(ctk.CTk):
     
     def show_evaluation_table(self):
         try:
+            self.mongo_client = pymongo.MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=5000)  # 5-second timeout
+            self.db = self.mongo_client["image_retrieval"]
+            self.collection = self.db["evaluation_results"]
+            self.map_collection = self.db["map_results"]
             # Check if the server is available
             self.mongo_client.server_info()  # This will raise an exception if the server is not reachable
             
