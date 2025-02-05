@@ -2,4 +2,3 @@ BD_images/
 __pycache__/
 .venv/
 converted_BD_images/
-texture_histograms.json
