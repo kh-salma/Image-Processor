@@ -148,3 +148,4 @@
 
 ## 📝 Annexe
 - Lien vers la présentation réalisée pour ce projet : [Conva Presentation](https://www.canva.com/design/DAGdAoh1yog/GNS-RNluPjwyLH0-yL_kyw/edit?utm_content=DAGdAoh1yog&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- Lien vers le projet sous GitHub : [Projet de recherche d'images par similarité](https://github.com/kh-salma/Image-Processor.git) 
