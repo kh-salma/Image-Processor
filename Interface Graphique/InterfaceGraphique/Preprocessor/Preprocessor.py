@@ -110,7 +110,7 @@ class Preprocessor:
                                 take_first_layer = False
 
                             # Process and store color descriptors
-                            color_histograms[image_path] = {
+                            color_histograms[file] = {
                                 "hist": self.color_describor.get_histogram(image).tolist(),
                                 "saturated_hue_hist": (
                                     self.color_describor.get_saturated_hue_histogram(image).tolist()
@@ -128,7 +128,7 @@ class Preprocessor:
                                 if color_space in gray_image_type + h_image_type + indexed_image_type else None
                                 for filter_name in ["sobel", "scharr", "prewitt"]
                             }
-                            shape_histograms[image_path] = {
+                            shape_histograms[file] = {
                                 "orientation_hist": {
                                     filter_name: self.shape_describor.get_histogram_orientation(image, filter=filter_name).tolist()
                                     for filter_name in ["sobel", "scharr", "prewitt"]
@@ -150,7 +150,7 @@ class Preprocessor:
                             }
 
                             # Process and store texture descriptors
-                            texture_histograms[image_path] = {
+                            texture_histograms[file] = {
                                 "stats_hist": self.texture_describor.get_stats_array(image).tolist(),
                                 "lbp_hist": self.texture_describor.get_local_binary_pattern(image, color_space, canaux=canaux).tolist(),
                                 "haralick_hist": self.texture_describor.get_haralick_histogram(image, color_space, canaux=canaux).tolist(),
@@ -159,7 +159,7 @@ class Preprocessor:
 
                             # Process and store CNN descriptors (only for "rgb")
                             if color_space == "rgb":
-                                cnn_vectors[image_path] = {
+                                cnn_vectors[file] = {
                                     "cnn_vector": self.cnn_describor.train_model(image_path).flatten().tolist()
                                 }
 
