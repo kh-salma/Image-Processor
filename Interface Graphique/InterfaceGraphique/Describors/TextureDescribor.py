@@ -46,16 +46,28 @@ class TextureDescribor:
         
         return lbp_values
     
-    def get_local_binary_pattern(self, image):
-        if image.ndim == 2:
-            lbp = self.local_binary_pattern_calculation(image).flatten()
+    def get_local_binary_pattern(self, image, image_type, canaux=None):
+        if image_type in h_image_type:
+            nb_elements = 360
+        elif image_type in indexed_image_type:
+            nb_elements = canaux[0]*canaux[1]*canaux[2]
         else:
-            lbps = [self.local_binary_pattern_calculation(image[channel]).flatten() for channel in range(image.shape[0])]
+            nb_elements = 256
+        if image.ndim == 2:
+            lbp = self.local_binary_pattern_calculation(image)
+            lbp = np.histogram(lbp, bins=nb_elements, range=(0, nb_elements-1))[0]
+        else:
+            lbps = [np.histogram(self.local_binary_pattern_calculation(image[channel]), bins=nb_elements, range=(0, nb_elements-1))[0] for channel in range(image.shape[0])]
             lbp = np.concatenate(lbps)
         return lbp
     
-    def get_local_binary_pattern_histogram_blob(self, input_array, window=(3, 3), nb_interval=4):
-        nb_elements = 256
+    def get_local_binary_pattern_histogram_blob(self, input_array, image_type, window=(3, 3), nb_interval=4, canaux=None):
+        if image_type in h_image_type:
+            nb_elements = 360
+        elif image_type in indexed_image_type:
+            nb_elements = canaux[0]*canaux[1]*canaux[2]
+        else:
+            nb_elements = 256
         blob_hist = np.zeros((nb_elements, nb_interval), dtype=np.int32)
         interval_size = 100 / nb_interval
 

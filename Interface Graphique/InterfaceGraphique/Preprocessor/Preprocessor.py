@@ -28,11 +28,11 @@ class Preprocessor:
                 self.color_spaces_data[file_name.split('__')[0]] = json.load(file)
         
         self.color_spaces = {
-            "rgb": self.color_spaces_data['rgb'], #
+            "rgb": self.color_spaces_data['rgb'], 
             "gray_uniform": self.color_spaces_data['grey_uniform'],
             "gray_601": self.color_spaces_data['grey_601'],
             "gray_907": self.color_spaces_data['grey_907'],
-            "yuv": self.color_spaces_data['yuv'], #
+            "yuv": self.color_spaces_data['yuv'], 
             "yiq": self.color_spaces_data['yiq'],
             "i1i2i3": self.color_spaces_data['i1i2i3'],
             "nrgb": self.color_spaces_data['nrgb'],
@@ -152,9 +152,9 @@ class Preprocessor:
                             # Process and store texture descriptors
                             texture_histograms[image_path] = {
                                 "stats_hist": self.texture_describor.get_stats_array(image).tolist(),
-                                "lbp_hist": self.texture_describor.get_local_binary_pattern(image).tolist(),
+                                "lbp_hist": self.texture_describor.get_local_binary_pattern(image, color_space, canaux=canaux).tolist(),
                                 "haralick_hist": self.texture_describor.get_haralick_histogram(image, color_space, canaux=canaux).tolist(),
-                                "blob_lbp_hist": self.texture_describor.get_local_binary_pattern_histogram_blob(self.texture_describor.local_binary_pattern_calculation(image, take_first_layer=take_first_layer)).tolist() if color_space in gray_image_type + h_image_type + indexed_image_type else None
+                                "blob_lbp_hist": self.texture_describor.get_local_binary_pattern_histogram_blob(self.texture_describor.local_binary_pattern_calculation(image, take_first_layer=take_first_layer), color_space, canaux=canaux).tolist() if color_space in gray_image_type + h_image_type + indexed_image_type else None
                             }
 
                             # Process and store CNN descriptors (only for "rgb")
