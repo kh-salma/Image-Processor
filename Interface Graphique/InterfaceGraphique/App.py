@@ -11,7 +11,6 @@ import pymongo
 from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
 import glob
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from InterfaceGraphique.Preprocessor.FileSplitter import FileSplitter
 from InterfaceGraphique.Filters.DistanceFilter import DistanceFilter
 from InterfaceGraphique.Describors.Normalizer import Normalizer
 from InterfaceGraphique.Assets.config import color_spaces, descriptors_json_file_path, gray_image_type, h_image_type, indexed_image_type, hist_keys
@@ -23,7 +22,6 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        FileSplitter.recombine_texture_histograms(color_spaces, descriptors_json_file_path)
         self.distance_filter = DistanceFilter()
 
         self.requested_image_name = None

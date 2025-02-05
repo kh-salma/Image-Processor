@@ -6,7 +6,6 @@ import json
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from InterfaceGraphique.Preprocessor.FileSplitter import FileSplitter
 from InterfaceGraphique.Filters.DistanceFilter import DistanceFilter
 from InterfaceGraphique.Describors.Normalizer import Normalizer
 from InterfaceGraphique.Assets.config import color_spaces, descriptors_json_file_path, descriptors, distances, shape_filters, color_spaces_, hist_keys, gray_image_type, h_image_type, indexed_image_type, normalization
@@ -14,7 +13,6 @@ from InterfaceGraphique.Assets.config import color_spaces, descriptors_json_file
 class Evaluator:
     def __init__(self):
         self.images_hist_dict = {}
-        FileSplitter.recombine_texture_histograms(color_spaces, descriptors_json_file_path)
         self.distance_filter = DistanceFilter()
         self.mongo_client = pymongo.MongoClient("mongodb://localhost:27017/")
         self.db = self.mongo_client["image_retrieval"]
